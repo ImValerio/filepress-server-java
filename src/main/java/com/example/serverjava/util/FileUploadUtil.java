@@ -10,7 +10,11 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.UUID;
 
+import static com.example.serverjava.util.SharedUtil.sanitizeFileName;
+
 public class FileUploadUtil {
+
+
     public static Path saveFile(String fileName, MultipartFile multipartFile) throws IOException {
         Path uploadPath = Paths.get("uploads");
         if(!Files.exists(uploadPath)){
@@ -19,7 +23,7 @@ public class FileUploadUtil {
 
         String fileCode = String.valueOf(UUID.randomUUID());
         InputStream inputStream = multipartFile.getInputStream();
-        fileName = fileName.replace(" ","-");
+        fileName = sanitizeFileName(fileName);
         Path filePath = uploadPath.resolve(fileCode+"_"+fileName);
         Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
 
