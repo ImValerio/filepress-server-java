@@ -1,5 +1,8 @@
 package com.example.serverjava.util;
 
+import com.nixxcode.jvmbrotli.enc.BrotliOutputStream;
+import com.nixxcode.jvmbrotli.enc.Encoder;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -13,7 +16,7 @@ public class CompressUtil {
     private final Path source;
     private final Path target;
 
-    public CompressUtil(Path source, Path target){
+    public CompressUtil(Path source, Path target) {
 
         this.source = source;
 
@@ -35,5 +38,24 @@ public class CompressUtil {
 
         }
 
+    }
+
+    public void compressBrotli() throws IOException {
+        // Init file input and output
+        FileInputStream inFile = new FileInputStream(source.toFile());
+        FileOutputStream outFile = new FileOutputStream(target.toFile());
+
+        Encoder.Parameters params = new Encoder.Parameters().setQuality(6);
+
+        BrotliOutputStream brotliOutputStream = new BrotliOutputStream(outFile, params);
+
+        int read = inFile.read();
+        while (read > -1) { // -1 means EOF
+            brotliOutputStream.write(read);
+            read = inFile.read();
+        }
+
+        brotliOutputStream.close();
+        inFile.close();
     }
 }

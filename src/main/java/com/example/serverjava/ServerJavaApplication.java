@@ -1,5 +1,6 @@
 package com.example.serverjava;
 
+import com.nixxcode.jvmbrotli.common.BrotliLoader;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -11,6 +12,7 @@ public class ServerJavaApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(ServerJavaApplication.class, args);
+        BrotliLoader.isBrotliAvailable();
     }
 
     @Bean

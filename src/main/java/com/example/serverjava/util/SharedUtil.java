@@ -4,7 +4,7 @@ public class SharedUtil {
 
     public static String addExtension(String fileName, String mode){
         if(mode.equals("brotli")){
-            return fileName+".bz";
+            return fileName+".br";
         }
 
         return fileName+".gz";

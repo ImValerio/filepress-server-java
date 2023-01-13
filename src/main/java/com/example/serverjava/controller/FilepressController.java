@@ -39,6 +39,7 @@ public class FilepressController {
         if(mode.equals("gzip")){
             compressUtil.compressGzip();
         }
+        compressUtil.compressBrotli();
 
         CompressDTO compressDTO = new CompressDTO("/"+targetPath.toString(),"10s, 500ms");
         return ResponseEntity.ok(compressDTO);

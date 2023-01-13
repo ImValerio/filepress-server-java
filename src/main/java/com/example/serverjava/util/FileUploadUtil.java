@@ -19,6 +19,7 @@ public class FileUploadUtil {
 
         String fileCode = String.valueOf(UUID.randomUUID());
         InputStream inputStream = multipartFile.getInputStream();
+        fileName = fileName.replace(" ","-");
         Path filePath = uploadPath.resolve(fileCode+"_"+fileName);
         Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
 
