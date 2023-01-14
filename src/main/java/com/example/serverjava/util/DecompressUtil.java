@@ -1,5 +1,9 @@
 package com.example.serverjava.util;
 
+import com.nixxcode.jvmbrotli.dec.BrotliInputStream;
+import com.nixxcode.jvmbrotli.enc.BrotliOutputStream;
+import com.nixxcode.jvmbrotli.enc.Encoder;
+
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -32,5 +36,22 @@ public class DecompressUtil {
 
         }
 
+    }
+
+    public void decompressBrotli() throws IOException {
+        // Init file input and output
+        FileInputStream inFile = new FileInputStream(source.toFile());
+        FileOutputStream outFile = new FileOutputStream(target.toFile());
+
+        BrotliInputStream brotliInputStream = new BrotliInputStream(inFile);
+
+        int read = brotliInputStream.read();
+        while (read > -1) { // -1 means EOF
+            outFile.write(read);
+            read = brotliInputStream.read();
+        }
+
+        brotliInputStream.close();
+        inFile.close();
     }
 }

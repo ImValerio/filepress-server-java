@@ -38,8 +38,9 @@ public class FilepressController {
 
         if(mode.equals("gzip")){
             compressUtil.compressGzip();
+        }else{
+            compressUtil.compressBrotli();
         }
-        compressUtil.compressBrotli();
 
         CompressDTO compressDTO = new CompressDTO("/"+targetPath.toString(),"10s, 500ms");
         return ResponseEntity.ok(compressDTO);
@@ -56,7 +57,10 @@ public class FilepressController {
 
         if(mode.equals("gzip")){
             decompressUtil.decompressGzip();
+        }else{
+            decompressUtil.decompressBrotli();
         }
+
 
         CompressDTO compressDTO = new CompressDTO("/"+targetPath.toString(),"10s, 500ms");
         return ResponseEntity.ok(compressDTO);
