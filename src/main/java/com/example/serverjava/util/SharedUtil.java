@@ -15,7 +15,6 @@ public class SharedUtil {
    }
 
     public static String sanitizeFileName(String fileName){
-
-        return fileName.strip().replaceAll("[^A-Za-z0-9-.]","");
+        return fileName.strip().replaceAll("[^.A-Za-z0-9]","");
     }
 }
